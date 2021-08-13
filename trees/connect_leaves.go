@@ -80,30 +80,30 @@ func connectLeaves2(root *Node) *Node {
 		return nil
 	}
 	var (
-		start   = root
-		result  *Node
-		curLeaf *Node
+		curLevelStart = root
+		result        *Node
+		curLeaf       *Node
 	)
 
-	for start != nil {
+	for curLevelStart != nil {
 		var (
-			nextStart *Node
-			prev      *Node
+			nextLevelStart *Node
+			NextLevelEnd   *Node
 		)
 
-		for cur := start; cur != nil; cur = cur.next {
+		for cur := curLevelStart; cur != nil; cur = cur.next {
 			// find out first next level pointer and current next level pointer
-			if prev == nil {
-				prev = cur.left
+			if NextLevelEnd == nil {
+				NextLevelEnd = cur.left
 			}
-			if prev == nil {
-				prev = cur.right
+			if NextLevelEnd == nil {
+				NextLevelEnd = cur.right
 			}
-			if nextStart == nil {
-				nextStart = cur.left
+			if nextLevelStart == nil {
+				nextLevelStart = cur.left
 			}
-			if nextStart == nil {
-				nextStart = cur.right
+			if nextLevelStart == nil {
+				nextLevelStart = cur.right
 			}
 			if isLeaf(cur) {
 				if curLeaf == nil {
@@ -115,20 +115,20 @@ func connectLeaves2(root *Node) *Node {
 				}
 			} else {
 				if cur.left != nil {
-					if cur.left != prev {
-						prev.next = cur.left
-						prev = prev.next
+					if cur.left != NextLevelEnd {
+						NextLevelEnd.next = cur.left
+						NextLevelEnd = NextLevelEnd.next
 					}
 				}
 				if cur.right != nil {
-					if cur.right != prev {
-						prev.next = cur.right
-						prev = prev.next
+					if cur.right != NextLevelEnd {
+						NextLevelEnd.next = cur.right
+						NextLevelEnd = NextLevelEnd.next
 					}
 				}
 			}
 		}
-		start = nextStart
+		curLevelStart = nextLevelStart
 	}
 	return result
 }
