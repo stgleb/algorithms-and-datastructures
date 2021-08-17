@@ -8,7 +8,7 @@ def remove_duplicates(a):
             a[i], a[next_index] = a[next_index], a[i]
             next_index += 1
     return a[:next_index]
-    
+
 
 if __name__ == "__main__":
     print(remove_duplicates([1, 1, 2, 3, 3, 4, 5, 5, 5]))
