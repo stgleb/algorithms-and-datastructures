@@ -31,5 +31,23 @@ def generate_parenthesis(n):
     return ["".join(r) for r in result]
 
 
+def generate_parenthesis_util2(left, right, cur, result):
+    if left > 0:
+        generate_parenthesis_util2(left - 1, right, cur + "(", result)
+
+    if right > left:
+        generate_parenthesis_util2(left, right - 1, cur + ")", result)
+
+    if right == 0:
+        result.append(cur)
+
+
+def generate_parenthesis2(n):
+    result = []
+    generate_parenthesis_util2(n, n, "", result)
+    return ["".join(r) for r in result]
+
+
 if __name__ == "__main__":
     print(generate_parenthesis(3))
+    print(generate_parenthesis2(3))
