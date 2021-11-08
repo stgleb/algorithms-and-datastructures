@@ -14,4 +14,4 @@ def palindrome_decomposition(s):
 
 
 if __name__ == "__main__":
-    print(palindrome_decomposition("1210057887"))
+    print(palindrome_decomposition("1210343057887")[-1])
