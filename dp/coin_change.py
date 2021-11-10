@@ -17,17 +17,17 @@ def coin_change_number_of_ways_rec(coins, number):
 
 
 def coin_change_number_of_ways_mem(coins, number):
-    table = [[0 for _ in range(len(coins) + 1)] for _ in range(number + 1)]
+    table = [[0 for _ in range(len(coins))] for _ in range(number + 1)]
     for i in range(len(table)):
         for j in range(len(table[i])):
             if i == 0:
                 table[i][j] = 1
             else:
-                if j > 1:
+                if j > 0:
                     table[i][j] += table[i][j - 1]
-                if coins[j - 1] <= i:
-                    table[i][j] += table[i - coins[j - 1]][j]
-    return table[number][len(coins)]
+                if coins[j] <= i:
+                    table[i][j] += table[i - coins[j]][j]
+    return table[number][len(coins) - 1]
 
 
 if __name__ == "__main__":
