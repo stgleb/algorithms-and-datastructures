@@ -1,5 +1,4 @@
 def count_trap_water(heights):
-    total = 0
     n = len(heights)
     left_max = [0 for _ in range(n)]
     right_max = [0 for _ in range(n)]
@@ -21,5 +20,25 @@ def count_trap_water(heights):
     return total
 
 
+def count_trap_water2(heights):
+    left_max = heights[0]
+    right_max = heights[-1]
+    n = len(heights) - 1
+    i, j = 0, n
+    total = 0
+
+    while i < j:
+        if left_max < right_max:
+            total += left_max - heights[i]
+            i += 1
+            left_max = max(heights[i], left_max)
+        else:
+            total += right_max - heights[j]
+            j -= 1
+            right_max = max(heights[j], right_max)
+    return total
+
+
 if __name__ == "__main__":
     print(count_trap_water([4, 3, 1, 5, 1]))
+    print(count_trap_water2([4, 3, 1, 5, 1]))
